@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__.'/../src/autoload.php';
+
+
+$args = Docopt::handle(GenDiff\DOC)->args;
+var_dump($args);
