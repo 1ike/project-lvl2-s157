@@ -6,4 +6,8 @@ require_once __DIR__.'/../src/autoload.php';
 
 
 $args = Docopt::handle(Differ\DOC)->args;
-var_dump($args);
+echo Differ\Differ\genDiff(
+    $args['--format'],
+    $args['<firstFile>'],
+    $args['<secondFile>']
+);

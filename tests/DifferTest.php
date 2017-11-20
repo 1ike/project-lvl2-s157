@@ -2,15 +2,22 @@
 namespace Differ\Tests;
 
 use \PHPUnit\Framework\TestCase;
-use \Differ\Differ;
+use function \Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    public function testTest()
+    public function testPrettyFlat()
     {
-        $name = 'john';
-        $user ='john';
-        $this->assertEquals($name, $user);
+        $diff = genDiff(
+            'pretty',
+            'tests/fixtures/before-flat.json',
+            'tests/fixtures/after-flat.json'
+        );
+        $expected = str_replace(
+            array("\n\r", "\n"),
+            PHP_EOL,
+            PRETTY_FLAT
+        );
+        $this->assertEquals($expected, $diff);
     }
 }
-var_dump(PRETTY);
