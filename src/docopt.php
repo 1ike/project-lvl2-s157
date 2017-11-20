@@ -1,5 +1,5 @@
 <?php
-namespace GenDiff;
+namespace Differ;
 
 const DOC = <<<DOC
 Generate diff.
