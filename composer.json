@@ -22,10 +22,12 @@
 
   "scripts": {
     "phpcs": "phpcs",
-    "phpcbf": "phpcbf"
+    "phpcbf": "phpcbf",
+    "phpunit": "phpunit"
   },
 
   "require-dev": {
+    "phpunit/phpunit": "*",
     "squizlabs/php_codesniffer":"*",
     "codeclimate/php-test-reporter": "dev-master"
   }
