@@ -12,7 +12,8 @@
       "Differ\\Tests\\": "tests"
     },
     "files": [
-        "src/docopt.php"
+        "src/docopt.php",
+        "tests/fixtures/expected.php"
     ]
   },
 

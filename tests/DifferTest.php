@@ -1,5 +1,5 @@
 <?php
-// namespace Differ\Tests;
+namespace Differ\Tests;
 
 use \PHPUnit\Framework\TestCase;
 use \Differ\Differ;
@@ -13,3 +13,4 @@ class DifferTest extends TestCase
         $this->assertEquals($name, $user);
     }
 }
+var_dump(PRETTY);
