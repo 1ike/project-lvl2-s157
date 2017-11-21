@@ -6,7 +6,14 @@ use function \Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    public function testPrettyFlat()
+    private $expected;
+
+    public function setUp()
+    {
+        $this->expected = file_get_contents('tests/fixtures/expected-flat.txt');
+    }
+
+    public function testPrettyJsonFlat()
     {
         $diff = genDiff(
             'pretty',
@@ -16,7 +23,22 @@ class DifferTest extends TestCase
         $expected = str_replace(
             array("\n\r", "\n"),
             PHP_EOL,
-            PRETTY_FLAT
+            $this->expected
+        );
+        $this->assertEquals($expected, $diff);
+    }
+
+    public function testPrettyYamlFlat()
+    {
+        $diff = genDiff(
+            'pretty',
+            'tests/fixtures/before-flat.yml',
+            'tests/fixtures/after-flat.yml'
+        );
+        $expected = str_replace(
+            array("\n\r", "\n"),
+            PHP_EOL,
+            $this->expected
         );
         $this->assertEquals($expected, $diff);
     }

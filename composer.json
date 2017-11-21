@@ -13,13 +13,13 @@
     },
     "files": [
         "src/docopt.php",
-        "src/Differ.php",
-        "tests/fixtures/expected.php"
+        "src/Differ.php"
     ]
   },
 
   "require": {
-    "docopt/docopt": "^1.0"
+    "docopt/docopt": "^1.0",
+    "symfony/finder": "^3.3"
   },
 
   "scripts": {

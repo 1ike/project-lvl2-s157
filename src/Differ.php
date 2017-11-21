@@ -10,8 +10,12 @@ function getUniqueKeys($arr1, $arr2)
 
 function genDiff($format, $pathToFile1, $pathToFile2)
 {
-    $tree1 = json_decode(file_get_contents($pathToFile1), true);
-    $tree2 = json_decode(file_get_contents($pathToFile2), true);
+    $inputFormat = pathinfo($pathToFile1, PATHINFO_EXTENSION);
+
+    $parser = \Differ\Parser::getParser($inputFormat);
+
+    $tree1 = $parser::parse($pathToFile1);
+    $tree2 = $parser::parse($pathToFile2);
 
     $keys = getUniqueKeys($tree1, $tree2);
 
