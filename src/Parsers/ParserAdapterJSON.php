@@ -1,5 +1,5 @@
 <?php
-namespace Differ\parsers;
+namespace Differ\Parsers;
 
 class ParserAdapterJSON implements ParserAdapterInterface
 {
