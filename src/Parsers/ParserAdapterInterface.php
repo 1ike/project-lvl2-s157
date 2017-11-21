@@ -3,5 +3,5 @@ namespace Differ\Parsers;
 
 interface ParserAdapterInterface
 {
-    public static function parse($path);
+    public static function parse($file);
 }
