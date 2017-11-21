@@ -23,31 +23,31 @@ function genDiff($format, $pathToFile1, $pathToFile2)
         $hasOldValue = array_key_exists($key, $tree1);
         if ($hasOldValue) {
             $oldValue = $tree1[$key] === true ? 'true' : $tree1[$key];
-            $lineMinus = '  - '.$key.': '.$oldValue;
+            $lineMinus = '  - ' . $key . ': ' . $oldValue;
         }
         $hasNewValue = array_key_exists($key, $tree2);
         if ($hasNewValue) {
             $newValue = $tree2[$key] === true ? 'true' : $tree2[$key];
-            $linePlus = '  + '.$key.': '.$newValue;
+            $linePlus = '  + ' . $key . ': ' . $newValue;
         }
 
         if (!$hasOldValue) {
-            $linePlus = '  + '.$key.': '.$newValue;
+            $linePlus = '  + ' . $key . ': ' . $newValue;
             return array_merge($acc, array($linePlus));
         }
 
         if (!$hasNewValue) {
-            $lineMinus = '  - '.$key.': '.$oldValue;
+            $lineMinus = '  - ' . $key . ': ' . $oldValue;
             return array_merge($acc, array($lineMinus));
         }
 
         if ($oldValue === $newValue) {
-            $line = '    '.$key.': '.$oldValue;
+            $line = '    ' . $key . ': ' . $oldValue;
             return array_merge($acc, array($line));
         }
 
         return array_merge($acc, array($linePlus), array($lineMinus));
     }, []);
 
-    return '{'.PHP_EOL.implode(PHP_EOL, $diff).PHP_EOL.'}';
+    return '{' . PHP_EOL . implode(PHP_EOL, $diff) . PHP_EOL . '}';
 }
