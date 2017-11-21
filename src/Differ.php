@@ -1,6 +1,9 @@
 <?php
 namespace Differ\Differ;
 
+use Illuminate\Support\Collection;
+use function Differ\growAST;
+
 function getUniqueKeys($arr1, $arr2)
 {
     $keys1 = array_keys($arr1);
@@ -14,8 +17,8 @@ function genDiff($format, $pathToFile1, $pathToFile2)
 
     $parser = \Differ\Parser::getParser($inputFormat);
 
-    $tree1 = $parser::parse($pathToFile1);
-    $tree2 = $parser::parse($pathToFile2);
+    $tree1 = $parser::parse(file_get_contents($pathToFile1));
+    $tree2 = $parser::parse(file_get_contents($pathToFile2));
 
     $keys = getUniqueKeys($tree1, $tree2);
 

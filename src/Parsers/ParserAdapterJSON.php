@@ -3,8 +3,8 @@ namespace Differ\Parsers;
 
 class ParserAdapterJSON implements ParserAdapterInterface
 {
-    public static function parse($path)
+    public static function parse($file)
     {
-        return json_decode(file_get_contents($path), true);
+        return json_decode($file, true);
     }
 }
