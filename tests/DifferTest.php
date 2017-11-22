@@ -6,11 +6,13 @@ use function \Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private $expected;
+    private $expectedPretty;
+    private $expectedPlain;
 
     public function setUp()
     {
-        $this->expected = file_get_contents('tests/fixtures/expected.txt');
+        $this->expectedPretty = file_get_contents('tests/fixtures/expected.txt');
+        $this->expectedPlain = file_get_contents('tests/fixtures/expected-plain.txt');
     }
 
     public function testPrettyJson()
@@ -23,23 +25,39 @@ class DifferTest extends TestCase
         $expected = str_replace(
             array("\n\r", "\n"),
             PHP_EOL,
-            $this->expected
+            $this->expectedPretty
         );
         $this->assertEquals($expected, $diff);
     }
 
-/*     public function testPrettyYamlFlat()
+    public function testPrettyYaml()
     {
         $diff = genDiff(
             'pretty',
-            'tests/fixtures/before-flat.yml',
-            'tests/fixtures/after-flat.yml'
+            'tests/fixtures/before.yml',
+            'tests/fixtures/after.yml'
         );
         $expected = str_replace(
             array("\n\r", "\n"),
             PHP_EOL,
-            $this->expected
+            $this->expectedPretty
         );
         $this->assertEquals($expected, $diff);
-    } */
+    }
+
+    public function testPlainYaml()
+    {
+        $diff = genDiff(
+            'plain',
+            'tests/fixtures/before.yml',
+            'tests/fixtures/after.yml'
+        );
+        $expected = str_replace(
+            array("\n\r", "\n"),
+            PHP_EOL,
+            $this->expectedPlain
+        );
+        $this->assertEquals($expected, $diff);
+    }
+
 }

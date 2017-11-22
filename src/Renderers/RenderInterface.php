@@ -3,5 +3,5 @@ namespace Differ\Renderers;
 
 interface RenderInterface
 {
-    public static function render($ast);
+    public function render($ast);
 }

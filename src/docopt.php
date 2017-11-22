@@ -6,10 +6,10 @@ Generate diff.
 
 Usage:
   gendiff (-h|--help)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
+  gendiff [-f <fmt>] <firstFile> <secondFile>
 
 Options:
   -h --help                     Show this screen
-  --format <fmt>                Report format [default: pretty]
+  -f --format <fmt>             Report format [default: pretty]
 
 DOC;

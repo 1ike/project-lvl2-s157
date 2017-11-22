@@ -5,9 +5,26 @@ use Symfony\Component\Yaml\Yaml;
 
 class ParserAdapterYAML implements ParserAdapterInterface
 {
-    public static function parse($file)
+    private function castNumToString($tree)
     {
-        return Yaml::parse($file);
-        // return Yaml::parse($file, Yaml::PARSE_OBJECT_FOR_MAP);
+        $newTree = array_map(function ($value) {
+
+            if (is_array($value)) {
+                return $this->castNumToString($value);
+            }
+
+            if (is_numeric($value)) {
+                return (string) $value;
+            }
+
+            return $value;
+        }, $tree);
+
+        return $newTree;
+    }
+
+    public function parse($file)
+    {
+        return $this->castNumToString(Yaml::parse($file));
     }
 }

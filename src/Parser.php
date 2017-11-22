@@ -3,15 +3,15 @@ namespace Differ;
 
 class Parser
 {
-    public static $parsers = array(
+    public $parsers = array(
         'json' => 'ParserAdapterJSON',
         'yml' => 'ParserAdapterYAML',
         'yaml' => 'ParserAdapterYAML'
     );
 
-    public static function getParser($inputFormat)
+    public function getParser($inputFormat)
     {
-        $classname = 'Differ\\Parsers\\' . self::$parsers[$inputFormat];
-        return $classname;
+        $classname = 'Differ\\Parsers\\' . $this->parsers[$inputFormat];
+        return new $classname;
     }
 }
