@@ -3,7 +3,7 @@ namespace Differ\Renderers;
 
 class RenderPretty implements RenderInterface
 {
-    private function renderValue($value, $level)
+    private static function renderValue($value, $level)
     {
         $newValue = json_encode($value, JSON_PRETTY_PRINT);
         if (!is_array($value)) {
