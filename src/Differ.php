@@ -22,7 +22,15 @@ function genDiff($format, $pathToFile1, $pathToFile2)
 
     $keys = getUniqueKeys($tree1, $tree2);
 
-    $diff = array_reduce($keys, function ($acc, $key) use ($tree1, $tree2) {
+    $ast = growAST($tree1, $tree2);
+
+    $renderer = \Differ\Renderer::getRenderer($format);
+
+    $diff = $renderer::render($ast);
+    // var_dump($ast);
+    // var_dump(json_encode(json_decode(file_get_contents($pathToFile1)), JSON_PRETTY_PRINT));
+
+/*    $diff = array_reduce($keys, function ($acc, $key) use ($tree1, $tree2) {
         $hasOldValue = array_key_exists($key, $tree1);
         if ($hasOldValue) {
             $oldValue = $tree1[$key] === true ? 'true' : $tree1[$key];
@@ -50,7 +58,7 @@ function genDiff($format, $pathToFile1, $pathToFile2)
         }
 
         return array_merge($acc, array($linePlus), array($lineMinus));
-    }, []);
+    }, []); */
 
-    return '{' . PHP_EOL . implode(PHP_EOL, $diff) . PHP_EOL . '}';
+    return $diff;
 }

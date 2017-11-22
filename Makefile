@@ -9,3 +9,6 @@ fix:
 
 test:
 	composer run-script phpunit tests
+
+w:
+	php watcher.php
