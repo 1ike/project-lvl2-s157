@@ -4,13 +4,6 @@ namespace Differ\Differ;
 use Illuminate\Support\Collection;
 use function Differ\growAST;
 
-function getUniqueKeys($arr1, $arr2)
-{
-    $keys1 = array_keys($arr1);
-    $keys2 = array_keys($arr2);
-    return array_unique(array_merge($keys1, $keys2));
-}
-
 function genDiff($format, $pathToFile1, $pathToFile2)
 {
     $inputFormat = pathinfo($pathToFile1, PATHINFO_EXTENSION);
@@ -20,45 +13,11 @@ function genDiff($format, $pathToFile1, $pathToFile2)
     $tree1 = $parser::parse(file_get_contents($pathToFile1));
     $tree2 = $parser::parse(file_get_contents($pathToFile2));
 
-    $keys = getUniqueKeys($tree1, $tree2);
-
     $ast = growAST($tree1, $tree2);
 
     $renderer = \Differ\Renderer::getRenderer($format);
 
     $diff = $renderer::render($ast);
-    // var_dump($ast);
-    // var_dump(json_encode(json_decode(file_get_contents($pathToFile1)), JSON_PRETTY_PRINT));
-
-/*    $diff = array_reduce($keys, function ($acc, $key) use ($tree1, $tree2) {
-        $hasOldValue = array_key_exists($key, $tree1);
-        if ($hasOldValue) {
-            $oldValue = $tree1[$key] === true ? 'true' : $tree1[$key];
-            $lineMinus = '  - ' . $key . ': ' . $oldValue;
-        }
-        $hasNewValue = array_key_exists($key, $tree2);
-        if ($hasNewValue) {
-            $newValue = $tree2[$key] === true ? 'true' : $tree2[$key];
-            $linePlus = '  + ' . $key . ': ' . $newValue;
-        }
-
-        if (!$hasOldValue) {
-            $linePlus = '  + ' . $key . ': ' . $newValue;
-            return array_merge($acc, array($linePlus));
-        }
-
-        if (!$hasNewValue) {
-            $lineMinus = '  - ' . $key . ': ' . $oldValue;
-            return array_merge($acc, array($lineMinus));
-        }
-
-        if ($oldValue === $newValue) {
-            $line = '    ' . $key . ': ' . $oldValue;
-            return array_merge($acc, array($line));
-        }
-
-        return array_merge($acc, array($linePlus), array($lineMinus));
-    }, []); */
 
     return $diff;
 }
