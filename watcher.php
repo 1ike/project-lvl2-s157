@@ -113,9 +113,10 @@ $listener->onAnything(function ($event, $resource, $path) {
 $listener->onModify(function ($resource, $path) {
     // echo "{$path} was modified.".PHP_EOL;
     echo PHP_EOL.PHP_EOL;
-    system("php bin/gendiff tests/fixtures/before.json tests/fixtures/after.json");
+    // system("php bin/gendiff tests/fixtures/before.json tests/fixtures/after.json");
     // system("php bin/gendiff tests/fixtures/before.yml tests/fixtures/after.yml");
     // system("php bin/gendiff -f plain tests/fixtures/before.json tests/fixtures/after.json");
+    system("php bin/gendiff -f json tests/fixtures/before.json tests/fixtures/after.json");
     echo PHP_EOL.PHP_EOL;
 });
 

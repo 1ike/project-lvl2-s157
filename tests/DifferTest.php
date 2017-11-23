@@ -60,4 +60,14 @@ class DifferTest extends TestCase
         $this->assertEquals($expected, $diff);
     }
 
+    public function testJsonYaml()
+    {
+        $diff = genDiff(
+            'json',
+            'tests/fixtures/before.yml',
+            'tests/fixtures/after.yml'
+        );
+        $expected = $file = file_get_contents('tests/fixtures/expected.json');
+        $this->assertEquals($expected, $diff);
+    }
 }
