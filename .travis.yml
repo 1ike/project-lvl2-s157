@@ -13,8 +13,8 @@ before_script:
 
 script: make lint test
 
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
 # after_script:
-#   - vendor/bin/test-reporter
+#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+after_script:
+  - vendor/bin/test-reporter
